@@ -1,0 +1,29 @@
+<h2>Productos</h2>
+<ng-container *ngIf="products && products.length; else noproducts">
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let product of products">
+      <div class="card" >
+        <div class="card-body">
+          <!-- <div class="card-title">{{ (product.product) ? product.product._id : product._id }}</div> -->
+          <div class="card-title">{{ ((product.product) ? product.product.name : product.name) | uppercase }}</div>
+          <div class="card-text">{{ ((product.product) ? product.product.description : product.description) | uppercase }}</div>
+          <div class="card-text">{{ ((product.product) ? product.product.barcode : product.barcode) | uppercase }}</div>
+          <div class="input-group mb-3">
+            <button class="btn btn-outline-secondary" type="button"(click)="manageOrder(((product.product) ? product.product._id : product._id), -1)"><i class="mdi mdi-minus"></i></button>
+            <input type="text" disabled class="form-control" placeholder="" aria-label="Example text with two button addons">
+            <button class="btn btn-outline-secondary" type="button"(click)="manageOrder(((product.product) ? product.product._id : product._id), 1)"><i class="mdi mdi-plus"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-success mt-3" (click)="submit()">Realizar pedido</button>
+  <pre>{{ order | json }}</pre>
+</ng-container>
+<ng-template #noproducts>
+  <div class="alert alert-danger" role="alert">
+    No hay productos de esta categoría
+  </div>
+</ng-template>
+

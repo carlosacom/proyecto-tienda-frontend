@@ -1,0 +1,15 @@
+<h3>Categorías</h3>
+<div class="mt-3">
+  <div class="form-check">
+    <input class="form-check-input" (change)="onChangeCategory('')" type="radio" name="category" id="default">
+    <label class="form-check-label" for="default">
+      Todas las categorías
+    </label>
+  </div>
+  <div class="form-check" *ngFor="let category of categories">
+    <input class="form-check-input" (change)="onChangeCategory(category._id)" type="radio" name="category"  [id]="category._id">
+    <label class="form-check-label" [for]="category._id">
+      {{ category.name | uppercase }}
+    </label>
+  </div>
+</div>
