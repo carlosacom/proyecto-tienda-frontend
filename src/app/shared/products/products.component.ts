@@ -44,8 +44,10 @@ export class ProductsComponent {
         this.order.push(item)
       }
     } else {
-      this.order[order].amount = this.order[order].amount + add
-      if (this.order[order].amount == 0) this.order.splice(order, 1);
+      if (this.order[order].amount < 10) {
+        this.order[order].amount = this.order[order].amount + add
+        if (this.order[order].amount == 0) this.order.splice(order, 1);
+      }
     }
   }
 

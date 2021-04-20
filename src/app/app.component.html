@@ -1,47 +1,52 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <ng-container *ngIf="orderSuccess; else createOrder">
-    <h1 class="mb-3">Confirmar Pedido</h1>
-    <div class="card">
-      <div class="card-body">
-        <h4>referencia: {{ orderSuccess._id }}</h4>
-        <h5>Confirmar pedido</h5>
-        <form [formGroup]="myForm" (submit)="onSubmitConfirmation()">
-          <div class="form-group">
-            <label for="name">Nombre Completo</label>
-            <input type="text"class="form-control" formControlName="name">
-          </div>
-          <div class="form-group">
-            <label for="name">Tipo de documento</label>
-            <input type="text"class="form-control" formControlName="document_type">
-          </div>
-          <div class="form-group">
-            <label for="name">Documento</label>
-            <input type="text"class="form-control" formControlName="document">
-          </div>
-          <div class="form-group">
-            <label for="name">Correo electronico</label>
-            <input type="text"class="form-control" formControlName="email">
-          </div>
-          <div class="form-group">
-            <label for="name">Dirección</label>
-            <input type="text"class="form-control" formControlName="address">
-          </div>
-          <button class="btn btn-success">Confirmar pedido</button>
-        </form>
-      </div>
-    </div>
+  <ng-container *ngIf="confirmedOrder; else elseTemplate">
+    <h1 class="text-success">Pedido Confirmado</h1>
   </ng-container>
-  <ng-template #createOrder>
-    <h1 class="mb-3">Generar pedido</h1>
-    <div class="row">
-        <div class="col-md-4">
-            <app-categories (newCategory)="newCategory($event)"></app-categories>
+  <ng-template #elseTemplate>
+    <ng-container *ngIf="orderSuccess; else createOrder">
+      <h1 class="mb-3">Confirmar Pedido</h1>
+      <div class="card">
+        <div class="card-body">
+          <h4>referencia: {{ orderSuccess._id }}</h4>
+          <h5>Confirmar pedido</h5>
+          <form [formGroup]="myForm" (submit)="onSubmitConfirmation()">
+            <div class="form-group">
+              <label for="name">Nombre Completo</label>
+              <input type="text"class="form-control" formControlName="full_name">
+            </div>
+            <div class="form-group">
+              <label for="name">Tipo de documento</label>
+              <input type="text"class="form-control" formControlName="document_type">
+            </div>
+            <div class="form-group">
+              <label for="name">Documento</label>
+              <input type="text"class="form-control" formControlName="document">
+            </div>
+            <div class="form-group">
+              <label for="name">Correo electronico</label>
+              <input type="text"class="form-control" formControlName="email">
+            </div>
+            <div class="form-group">
+              <label for="name">Dirección</label>
+              <input type="text"class="form-control" formControlName="address">
+            </div>
+            <button class="btn btn-success mt-3">Confirmar pedido</button>
+          </form>
         </div>
-        <div class="col-md-8">
-            <app-products (newOrder)="newOrder($event)"></app-products>
-        </div>
-    </div>
+      </div>
+    </ng-container>
+    <ng-template #createOrder>
+      <h1 class="mb-3">Generar pedido</h1>
+      <div class="row">
+          <div class="col-md-4">
+              <app-categories (newCategory)="newCategory($event)"></app-categories>
+          </div>
+          <div class="col-md-8">
+              <app-products (newOrder)="newOrder($event)"></app-products>
+          </div>
+      </div>
+    </ng-template>
   </ng-template>
 
 </div>
